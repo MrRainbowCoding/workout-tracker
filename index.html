@@ -2,6 +2,41 @@
 <html>
 <head>
   <title>Exercise Tracker</title>
+    <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #exerciseTime, #caloriesBurned {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    #louisvilleTime {
+      font-size: 14px;
+      color: #666;
+    }
+
+    #startButton, #stopButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #stopButton {
+      background-color: #e74c3c;
+    }
+  </style>
   <script>
     function updateClock() {
       const currentTime = new Date();
