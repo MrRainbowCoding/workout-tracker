@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Time and Stopwatch</title>
+  <script>
+    function updateClock() {
+      const currentTime = new Date();
+      const options = { timeZone: 'America/Kentucky/Louisville', timeStyle: 'long' };
+      const louisvilleTime = currentTime.toLocaleTimeString('en-US', options);
+      document.getElementById('louisvilleTime').textContent = louisvilleTime;
+    }
+
+    let startTime;
+    let timerInterval;
+
+    function startStopwatch() {
+      startTime = Date.now();
+      timerInterval = setInterval(updateStopwatch, 1000);
+    }
+
+    function updateStopwatch() {
+      const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+      document.getElementById('stopwatch').textContent = `You've been here for ${elapsedTime} seconds`;
+    }
+
+    window.onload = function() {
+      updateClock();
+      startStopwatch();
+      setInterval(updateClock, 1000);
+    };
+  </script>
+</head>
+<body>
+  <h1>Current Time in Louisville, KY:</h1>
+  <p id="louisvilleTime"></p>
+  <h2>Stopwatch:</h2>
+  <p id="stopwatch">Calculating...</p>
+</body>
+</html>
