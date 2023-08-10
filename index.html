@@ -24,7 +24,7 @@
       const seconds = Math.floor((elapsedTime % 60000) / 1000);
       const milliseconds = elapsedTime % 1000;
       
-      document.getElementById('stopwatch').textContent = `Time spent: ${minutes}:${seconds}.${milliseconds}`;
+      document.getElementById('stopwatch').textContent = `Working out for: ${minutes}:${seconds}.${milliseconds}`;
     }
 
     window.onload = function() {
@@ -35,7 +35,7 @@
   </script>
 </head>
 <body>
-  <h1>Current Time in Louisville, KY:</h1>
+  <h1>Time:</h1>
   <p id="louisvilleTime"></p>
   <h2>Stopwatch:</h2>
   <p id="stopwatch">Calculating...</p>
