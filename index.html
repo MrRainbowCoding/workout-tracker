@@ -17,9 +17,18 @@
 
     function startExercise() {
       startTime = Date.now();
+      caloriesBurned /= 2; // Dividing calories by 2
       timerInterval = setInterval(updateExercise, 10);
       workoutStarted = true;
       document.getElementById('startButton').disabled = true;
+      document.getElementById('stopButton').style.display = 'inline';
+    }
+
+    function stopExercise() {
+      workoutStarted = false;
+      clearInterval(timerInterval);
+      document.getElementById('startButton').disabled = false;
+      document.getElementById('stopButton').style.display = 'none';
     }
 
     function updateExercise() {
@@ -50,5 +59,6 @@
   <p id="exerciseTime">Working out for:</p>
   <p id="caloriesBurned">Calories Burned:</p>
   <button id="startButton" onclick="startExercise()">Start Workout</button>
+  <button id="stopButton" style="display: none;" onclick="stopExercise()">Stop Workout</button>
 </body>
 </html>
