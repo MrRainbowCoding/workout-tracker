@@ -1,43 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Time and Stopwatch</title>
+  <title>Exercise Tracker</title>
   <script>
     function updateClock() {
       const currentTime = new Date();
       const options = { timeZone: 'America/Kentucky/Louisville', timeStyle: 'long' };
       const louisvilleTime = currentTime.toLocaleTimeString('en-US', options);
-      document.getElementById('louisvilleTime').textContent = louisvilleTime;
+      document.getElementById('louisvilleTime').textContent = `Current Time: ${louisvilleTime}`;
     }
 
     let startTime;
     let timerInterval;
+    let caloriesBurned = 0;
 
-    function startStopwatch() {
+    function startExercise() {
       startTime = Date.now();
-      timerInterval = setInterval(updateStopwatch, 10);
+      timerInterval = setInterval(updateExercise, 10);
     }
 
-    function updateStopwatch() {
+    function updateExercise() {
       const elapsedTime = Date.now() - startTime;
-      const minutes = Math.floor(elapsedTime / 60000);
+      const hours = Math.floor(elapsedTime / 3600000);
+      const minutes = Math.floor((elapsedTime % 3600000) / 60000);
       const seconds = Math.floor((elapsedTime % 60000) / 1000);
       const milliseconds = elapsedTime % 1000;
       
-      document.getElementById('stopwatch').textContent = `Working out for: ${minutes}:${seconds}.${milliseconds}`;
+      const caloriesPerSecond = 0.1; // Example calories burned per second
+      caloriesBurned = (elapsedTime / 1000) * caloriesPerSecond;
+      
+      document.getElementById('exerciseTime').textContent = `Working out for: ${hours}:${minutes}:${seconds}.${milliseconds}`;
+      document.getElementById('caloriesBurned').textContent = `Calories Burned: ${caloriesBurned.toFixed(2)} cal`;
     }
 
     window.onload = function() {
       updateClock();
-      startStopwatch();
+      startExercise();
       setInterval(updateClock, 1000);
+      setInterval(updateExercise, 10);
     };
   </script>
 </head>
 <body>
-  <h1>Time:</h1>
-  <p id="louisvilleTime"></p>
-  <h2>Stopwatch:</h2>
-  <p id="stopwatch">Calculating...</p>
+  <h1>Exercise Tracker</h1>
+  <p id="louisvilleTime">Current Time:</p>
+  <p id="exerciseTime">Working out for:</p>
+  <p id="caloriesBurned">Calories Burned:</p>
 </body>
 </html>
