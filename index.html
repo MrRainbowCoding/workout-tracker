@@ -15,12 +15,16 @@
 
     function startStopwatch() {
       startTime = Date.now();
-      timerInterval = setInterval(updateStopwatch, 1000);
+      timerInterval = setInterval(updateStopwatch, 10);
     }
 
     function updateStopwatch() {
-      const elapsedTime = Math.floor((Date.now() - startTime) / 1000);
-      document.getElementById('stopwatch').textContent = `You've been here for ${elapsedTime} seconds`;
+      const elapsedTime = Date.now() - startTime;
+      const minutes = Math.floor(elapsedTime / 60000);
+      const seconds = Math.floor((elapsedTime % 60000) / 1000);
+      const milliseconds = elapsedTime % 1000;
+      
+      document.getElementById('stopwatch').textContent = `Time spent: ${minutes}:${seconds}.${milliseconds}`;
     }
 
     window.onload = function() {
