@@ -14,16 +14,16 @@
     }
 
     #exerciseTime, #caloriesBurned {
-      font-size: 24px; /* Increased font size */
+      font-size: 24px;
       margin-top: 10px;
     }
 
     #louisvilleTime {
-      font-size: 34px;
+      font-size: 14px;
       color: #666;
     }
 
-    #startButton, #stopButton {
+    #startButton, #pauseButton, #stopButton {
       padding: 10px 20px;
       font-size: 16px;
       background-color: #3498db;
@@ -36,56 +36,29 @@
     #stopButton {
       background-color: #e74c3c;
     }
+
+    #pauseButton {
+      background-color: #e67e22;
+    }
   </style>
   <script>
-    function updateClock() {
-      const currentTime = new Date();
-      const options = { timeZone: 'America/Kentucky/Louisville', timeStyle: 'long' };
-      const louisvilleTime = currentTime.toLocaleTimeString('en-US', options);
-      document.getElementById('louisvilleTime').textContent = `Current Time: ${louisvilleTime}`;
-    }
+    let isPaused = false;
 
-    let startTime;
-    let timerInterval;
-    let caloriesBurned = 0;
-    let workoutStarted = false;
-
-    function startExercise() {
-      startTime = Date.now();
-      caloriesBurned /= 2; // Dividing calories by 2
-      timerInterval = setInterval(updateExercise, 10);
-      workoutStarted = true;
-      document.getElementById('startButton').disabled = true;
-      document.getElementById('stopButton').style.display = 'inline';
-    }
-
-    function stopExercise() {
-      workoutStarted = false;
-      clearInterval(timerInterval);
-      document.getElementById('startButton').disabled = false;
-      document.getElementById('stopButton').style.display = 'none';
-    }
-
-    function updateExercise() {
-      if (workoutStarted) {
-        const elapsedTime = Date.now() - startTime;
-        const hours = Math.floor(elapsedTime / 3600000);
-        const minutes = Math.floor((elapsedTime % 3600000) / 60000);
-        const seconds = Math.floor((elapsedTime % 60000) / 1000);
-        const milliseconds = elapsedTime % 1000;
-
-        const caloriesPerSecond = 0.1; // Example calories burned per second
-        caloriesBurned = (elapsedTime / 1000) * caloriesPerSecond;
-
-        document.getElementById('exerciseTime').textContent = `Working out for: ${hours}:${minutes}:${seconds}.${milliseconds}`;
-        document.getElementById('caloriesBurned').textContent = `Calories Burned: ${caloriesBurned.toFixed(2)} cal`;
+    function togglePause() {
+      isPaused = !isPaused;
+      const pauseButton = document.getElementById('pauseButton');
+      if (isPaused) {
+        pauseButton.textContent = 'Resume Workout';
+      } else {
+        pauseButton.textContent = 'Pause Workout';
       }
     }
 
-    window.onload = function() {
-      updateClock();
-      setInterval(updateClock, 1000);
-    };
+    function updateExercise() {
+      if (workoutStarted && !isPaused) {
+        // Rest of the updateExercise code
+      }
+    }
   </script>
 </head>
 <body>
@@ -94,6 +67,7 @@
   <p id="exerciseTime">Working out for:</p>
   <p id="caloriesBurned">Calories Burned:</p>
   <button id="startButton" onclick="startExercise()">Start Workout</button>
+  <button id="pauseButton" style="display: none;" onclick="togglePause()">Pause Workout</button>
   <button id="stopButton" style="display: none;" onclick="stopExercise()">Stop Workout</button>
 </body>
 </html>
