@@ -3,45 +3,16 @@
 <head>
   <title>Exercise Tracker</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      background-color: #f5f5f5;
-    }
-
-    h1 {
-      color: #333;
-    }
-
-    #exerciseTime, #caloriesBurned {
-      font-size: 24px;
-      margin-top: 10px;
-    }
-
-    #louisvilleTime {
-      font-size: 14px;
-      color: #666;
-    }
-
-    #startButton, #pauseButton, #stopButton {
-      padding: 10px 20px;
-      font-size: 16px;
-      background-color: #3498db;
-      color: #fff;
-      border: none;
-      cursor: pointer;
-      margin-top: 20px;
-    }
-
-    #stopButton {
-      background-color: #e74c3c;
-    }
-
-    #pauseButton {
-      background-color: #e67e22;
-    }
+    /* Your styles here */
   </style>
   <script>
+    function updateClock() {
+      const currentTime = new Date();
+      const options = { timeZone: 'America/Kentucky/Louisville', timeStyle: 'long' };
+      const louisvilleTime = currentTime.toLocaleTimeString('en-US', options);
+      document.getElementById('louisvilleTime').textContent = `Current Time: ${louisvilleTime}`;
+    }
+
     let startTime;
     let timerInterval;
     let caloriesBurned = 0;
