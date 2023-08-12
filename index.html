@@ -3,69 +3,46 @@
 <head>
   <title>Exercise Tracker</title>
   <style>
-    /* Your styles here */
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #exerciseTime, #caloriesBurned {
+      font-size: 24px;
+      margin-top: 10px;
+    }
+
+    #louisvilleTime {
+      font-size: 14px;
+      color: #666;
+    }
+
+    #startButton, #pauseButton, #stopButton {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #3498db;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    #stopButton {
+      background-color: #e74c3c;
+    }
+
+    #pauseButton {
+      background-color: #e67e22;
+    }
   </style>
   <script>
-    function updateClock() {
-      const currentTime = new Date();
-      const options = { timeZone: 'America/Kentucky/Louisville', timeStyle: 'long' };
-      const louisvilleTime = currentTime.toLocaleTimeString('en-US', options);
-      document.getElementById('louisvilleTime').textContent = `Current Time: ${louisvilleTime}`;
-    }
-
-    let startTime;
-    let timerInterval;
-    let caloriesBurned = 0;
-    let workoutStarted = false;
-    let isPaused = false;
-
-    function startExercise() {
-      startTime = Date.now();
-      caloriesBurned /= 2; // Dividing calories by 2
-      timerInterval = setInterval(updateExercise, 10);
-      workoutStarted = true;
-      document.getElementById('startButton').disabled = true;
-      document.getElementById('pauseButton').style.display = 'inline';
-      document.getElementById('stopButton').style.display = 'inline';
-    }
-
-    function pauseExercise() {
-      isPaused = true;
-    }
-
-    function resumeExercise() {
-      isPaused = false;
-    }
-
-    function stopExercise() {
-      workoutStarted = false;
-      clearInterval(timerInterval);
-      document.getElementById('startButton').disabled = false;
-      document.getElementById('pauseButton').style.display = 'none';
-      document.getElementById('stopButton').style.display = 'none';
-      isPaused = false;
-    }
-
-    function updateExercise() {
-      if (workoutStarted && !isPaused) {
-        const elapsedTime = Date.now() - startTime;
-        const hours = Math.floor(elapsedTime / 3600000);
-        const minutes = Math.floor((elapsedTime % 3600000) / 60000);
-        const seconds = Math.floor((elapsedTime % 60000) / 1000);
-        const milliseconds = elapsedTime % 1000;
-
-        const caloriesPerSecond = 0.1; // Example calories burned per second
-        caloriesBurned = (elapsedTime / 1000) * caloriesPerSecond;
-
-        document.getElementById('exerciseTime').textContent = `Working out for: ${hours}:${minutes}:${seconds}.${milliseconds}`;
-        document.getElementById('caloriesBurned').textContent = `Calories Burned: ${caloriesBurned.toFixed(2)} cal`;
-      }
-    }
-
-    window.onload = function() {
-      updateClock();
-      setInterval(updateClock, 1000);
-    };
+    // Your JavaScript code here
   </script>
 </head>
 <body>
