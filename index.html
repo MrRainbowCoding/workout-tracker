@@ -23,7 +23,7 @@
       color: #666;
     }
 
-    #startButton, #pauseButton, #stopButton {
+    #startButton, #pauseButton, #stopButton, #toggleCaloriesButton {
       padding: 10px 20px;
       font-size: 16px;
       background-color: #3498db;
@@ -40,6 +40,10 @@
     #pauseButton {
       background-color: #e67e22;
     }
+
+    #toggleCaloriesButton {
+      background-color: #27ae60;
+    }
   </style>
   <script>
     function updateClock() {
@@ -54,6 +58,16 @@
     let caloriesBurned = 0;
     let workoutStarted = false;
     let isPaused = false;
+    let caloriesVisible = true;
+
+    function toggleCalories() {
+      caloriesVisible = !caloriesVisible;
+      if (caloriesVisible) {
+        document.getElementById('caloriesBurned').style.display = 'block';
+      } else {
+        document.getElementById('caloriesBurned').style.display = 'none';
+      }
+    }
 
     function startExercise() {
       startTime = Date.now();
@@ -63,6 +77,7 @@
       document.getElementById('startButton').disabled = true;
       document.getElementById('pauseButton').style.display = 'inline';
       document.getElementById('stopButton').style.display = 'inline';
+      document.getElementById('toggleCaloriesButton').style.display = 'inline';
     }
 
     function pauseExercise() {
@@ -79,6 +94,7 @@
       document.getElementById('startButton').disabled = false;
       document.getElementById('pauseButton').style.display = 'none';
       document.getElementById('stopButton').style.display = 'none';
+      document.getElementById('toggleCaloriesButton').style.display = 'none';
       isPaused = false;
     }
 
@@ -108,9 +124,10 @@
   <h1>Exercise Tracker</h1>
   <p id="louisvilleTime">Current Time:</p>
   <p id="exerciseTime">Working out for:</p>
-  <p id="caloriesBurned">Calories Burned:</p>
+  <p id="caloriesBurned" style="display: none;">Calories Burned:</p>
   <button id="startButton" onclick="startExercise()">Start Workout</button>
   <button id="pauseButton" style="display: none;" onclick="pauseExercise()">Pause Workout</button>
   <button id="stopButton" style="display: none;" onclick="stopExercise()">Stop Workout</button>
+  <button id="toggleCaloriesButton" style="display: none;" onclick="toggleCalories()">Toggle Calories</button>
 </body>
 </html>
